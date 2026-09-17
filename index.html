@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kirk Boike Architects | Custom Homes, Port Townsend</title>
+  <meta name="description" content="Kirk Boike Architects designs new-build custom homes and small projects on the Olympic Peninsula. Site design, home design and structural design from one studio in Port Townsend, Washington." />
+  <meta name="theme-color" content="#f4f5f3" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:title" content="Kirk Boike Architects" />
+  <meta property="og:description" content="Residential architecture and structural design on the Olympic Peninsula." />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+
+  <!-- Blueprint loading screen -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader__grid"></div>
+    <div class="loader__inner">
+      <svg class="loader__drawing" viewBox="0 0 640 320" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <!-- Front elevation of the house: shed roof, glazed south wall, deck -->
+        <path class="ld" d="M60 250 H580" />
+        <path class="ld" d="M120 250 V110 L520 70 V250" />
+        <path class="ld" d="M96 118 L544 74" />
+        <path class="ld" d="M96 118 L96 130 L544 86 L544 74" />
+        <path class="ld" d="M140 250 V120" /><path class="ld" d="M200 250 V114" /><path class="ld" d="M260 250 V108" />
+        <path class="ld" d="M320 250 V102" /><path class="ld" d="M380 250 V96" /><path class="ld" d="M440 250 V90" /><path class="ld" d="M500 250 V84" />
+        <path class="ld" d="M140 170 H500" />
+        <path class="ld" d="M80 250 V262 H560 V250" />
+        <path class="ld" d="M100 262 V282" /><path class="ld" d="M540 262 V282" /><path class="ld" d="M320 262 V282" />
+        <path class="ld" d="M60 300 H580" stroke-dasharray="2 6" />
+        <path class="ld" d="M120 40 V60 M520 40 V60 M120 50 H520" />
+        <path class="ld" d="M600 110 H620 M600 250 H620 M610 110 V250" />
+      </svg>
+      <div class="loader__meta">
+        <span class="loader__name">Kirk Boike Architects</span>
+        <span class="loader__count"><span id="loader-count">00</span>%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Single shared WebGL canvas. Every 3D view on the page renders into a region of it. -->
+  <canvas id="gl" class="gl" aria-hidden="true"></canvas>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__brand" aria-label="Kirk Boike Architects, home">
+        <span class="nav__mark" aria-hidden="true"></span>
+        <span class="nav__brandtext">Kirk Boike <em>Architects</em></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#services" data-nav>Services</a>
+        <a href="#anatomy" data-nav>Anatomy</a>
+        <a href="#materials" data-nav>Materials</a>
+        <a href="#process" data-nav>Process</a>
+        <a href="#studio" data-nav>Studio</a>
+      </nav>
+      <a href="#contact" class="btn btn--solid nav__cta" data-magnetic>Book a consultation</a>
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__inner">
+      <nav class="menu__links" aria-label="Mobile">
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#anatomy">Anatomy</a>
+        <a href="#materials">Materials</a>
+        <a href="#process">Process</a>
+        <a href="#studio">Studio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="menu__foot">
+        <a href="tel:+13603856140">+1 360-385-6140</a>
+        <span>4601 Mason St, Port Townsend, WA 98368</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- HERO: floor plan morphs into a 3D house, drag to rotate -->
+    <section class="hero" id="hero">
+      <div class="hero__copy">
+        <h1 class="hero__title" data-split>Custom homes, drawn for the Peninsula.</h1>
+        <p class="hero__sub" data-split-lines>Site, home and structural design from one studio in Port Townsend. New-build custom homes and small projects.</p>
+        <div class="hero__cta" data-reveal-group>
+          <a href="#contact" class="btn btn--solid" data-magnetic>Book a consultation</a>
+          <a href="#projects" class="btn btn--line" data-magnetic>View projects</a>
+        </div>
+      </div>
+      <div class="hero__stage" id="hero-stage" aria-label="Interactive 3D model of a custom home. Drag to rotate.">
+        <div class="hero__stage-grid"></div>
+        <div class="hero__hint" id="hero-hint">Drag to rotate</div>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement" id="statement">
+      <p class="statement__text" data-words>Every house starts with the land. We walk the site before drawing a line, then design the home and engineer its structure under one roof. One studio, one set of drawings, one person answering the phone.</p>
+    </section>
+
+    <!-- SERVICES: scroll-controlled house assembly -->
+    <section class="services" id="services">
+      <div class="services__pin">
+        <div class="services__stage" id="services-stage" aria-hidden="true"></div>
+        <div class="services__copy">
+          <span class="eyebrow">What we do</span>
+          <div class="services__steps" id="services-steps">
+            <article class="svc" data-step="0">
+              <h2 class="svc__title">Site design</h2>
+              <p class="svc__body">Grading, drainage, driveway, septic and setbacks are designed with the house, not after it. The plan follows the slope and the sun.</p>
+            </article>
+            <article class="svc" data-step="1">
+              <h2 class="svc__title">Structural design</h2>
+              <p class="svc__body">Framing, beams and the lateral system are engineered in the same room the plans are drawn in. Long spans and big glass without guesswork.</p>
+            </article>
+            <article class="svc" data-step="2">
+              <h2 class="svc__title">Home design</h2>
+              <p class="svc__body">Plans, elevations, materials and details for new-build custom homes and small projects. Built to be lived in for decades in Peninsula weather.</p>
+            </article>
+          </div>
+          <div class="services__progress" aria-hidden="true">
+            <span class="services__bar"><i id="services-bar"></i></span>
+            <span class="services__label" id="services-label">Site</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUN STUDY: drag the hour, watch the shadows move across the site -->
+    <section class="sun" id="sun">
+      <div class="sun__copy">
+        <h2 class="sun__title" data-reveal-type="lines">A sun study for every site</h2>
+        <p class="sun__body" data-reveal>Before the plan is fixed we run the sun over the model for the whole year. Where the light lands in December decides where the glass goes. Drag the hour and watch the shadows move.</p>
+        <div class="sun__controls">
+          <div class="sun__readout"><span id="sun-time">2:00 pm</span><span id="sun-season">June</span></div>
+          <label class="sun__label" for="sun-hour">Hour of the day</label>
+          <input type="range" id="sun-hour" min="5" max="21" step="0.1" value="14" />
+          <div class="sun__seasons" role="group" aria-label="Season">
+            <button class="chip is-on" data-season="jun" aria-pressed="true">June</button>
+            <button class="chip" data-season="equinox" aria-pressed="false">March</button>
+            <button class="chip" data-season="dec" aria-pressed="false">December</button>
+          </div>
+          <p class="sun__note" id="sun-note">Long evening light on the deck. The overhang keeps the glass in shade at noon.</p>
+        </div>
+      </div>
+      <div class="sun__stage" id="sun-stage" aria-label="3D sun study of the house"></div>
+    </section>
+
+    <!-- STRUCTURAL X-RAY HOVER -->
+    <section class="xray" id="xray">
+      <div class="xray__copy">
+        <h2 class="xray__title" data-reveal-type="chars-flip">Engineered in the same room it was drawn in.</h2>
+        <p class="xray__body">Most studios send drawings out for engineering and wait. Here the framing plan, beam sizes and shear walls are worked out alongside the architecture, so the structure shapes the space instead of fighting it. Move across the photo to see the frame beneath the finish.</p>
+        <ul class="xray__list" data-stagger="x">
+          <li>Post and beam, glulam and steel where spans need it</li>
+          <li>Lateral design for wind and seismic on the Peninsula</li>
+          <li>Foundation and slab design for sloped and wet sites</li>
+        </ul>
+      </div>
+      <div class="xray__media" id="xray-media" data-media-reveal="left">
+        <img class="xray__photo" src="https://picsum.photos/id/316/1400/1000" alt="Timber post and beam structure of a boardwalk" crossorigin="anonymous" loading="lazy" />
+        <canvas class="xray__lines" id="xray-lines" aria-hidden="true"></canvas>
+        <div class="xray__lens" id="xray-lens" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+      <div class="projects__head">
+        <h2 class="projects__title" data-reveal-type="scramble">Selected work</h2>
+      </div>
+      <div class="projects__grid" id="projects-grid"></div>
+    </section>
+
+    <!-- DRAWING TO RENDER -->
+    <section class="render" id="render">
+      <div class="render__pin">
+        <div class="render__media" id="render-media">
+          <img class="render__photo" id="render-photo" src="https://picsum.photos/id/311/1800/1100" alt="Timber framed interior with floor-to-ceiling glazing" crossorigin="anonymous" loading="lazy" />
+          <canvas class="render__lines" id="render-lines" aria-hidden="true"></canvas>
+          <div class="render__scan" id="render-scan" aria-hidden="true"></div>
+        </div>
+        <div class="render__copy">
+          <h2 class="render__title">From line to light</h2>
+          <p class="render__body">Every project moves from the same first sketch to a permit-ready set. What you see on the wall is what the drawings said.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANATOMY: interactive building explorer -->
+    <section class="anatomy" id="anatomy">
+      <div class="anatomy__head">
+        <h2 class="anatomy__title" data-reveal-type="wipe">Anatomy of a Boike home</h2>
+        <p class="anatomy__body">Explode it, cut it open or look through the skin. Drag to orbit.</p>
+      </div>
+      <div class="anatomy__wrap">
+        <div class="anatomy__stage" id="anatomy-stage" aria-label="Interactive 3D model with hotspots">
+          <div class="hotspots" id="hotspots"></div>
+        </div>
+        <aside class="anatomy__panel">
+          <div class="anatomy__controls" role="group" aria-label="View modes">
+            <button class="mode" data-mode="explode" aria-pressed="false">Explode</button>
+            <button class="mode" data-mode="cutaway" aria-pressed="false">Cutaway</button>
+            <button class="mode" data-mode="xray" aria-pressed="false">X-ray</button>
+          </div>
+          <div class="anatomy__cut" id="anatomy-cut">
+            <label for="cut-range">Section depth</label>
+            <input type="range" id="cut-range" min="0" max="100" value="50" />
+          </div>
+          <ul class="layers" id="layers" aria-label="Building layers">
+            <li data-layer="foundation">Foundation</li>
+            <li data-layer="floorFraming">Floor framing</li>
+            <li data-layer="wallFraming">Wall framing</li>
+            <li data-layer="roofFraming">Roof framing</li>
+            <li data-layer="cladding">Cedar cladding</li>
+            <li data-layer="glazing">Glazing</li>
+            <li data-layer="roof">Standing seam roof</li>
+            <li data-layer="interior">Interior</li>
+            <li data-layer="deck">Deck</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FLYTHROUGH: interior to exterior camera path (the one dark block on the page) -->
+    <section class="fly" id="fly">
+      <div class="fly__pin">
+        <div class="fly__stage" id="fly-stage" aria-hidden="true"></div>
+        <div class="fly__captions" id="fly-captions">
+          <p class="fly__cap is-on">Inside, the plan opens toward the south light.</p>
+          <p class="fly__cap">The glass lands on one glulam beam. Nothing interrupts the view.</p>
+          <p class="fly__cap">Outside, the roof reads as a single line against the firs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATERIALS: accordion image slider -->
+    <section class="materials" id="materials">
+      <div class="materials__head">
+        <h2 class="materials__title" data-reveal-type="chars-rise">Built for Peninsula weather</h2>
+        <p class="materials__body" data-reveal>Salt air, sideways rain and long dry summers. The material list is short and every item on it has been on a house here for a decade or more.</p>
+      </div>
+      <div class="acc" id="materials-acc">
+        <!-- placeholder textures, replace with detail photography from built work -->
+        <article class="acc__panel is-open" tabindex="0">
+          <img src="https://picsum.photos/id/307/900/1200" alt="Cedar boards" loading="lazy" />
+          <div class="acc__text"><h3>Cedar rainscreen</h3><p>Vertical clear cedar over a ventilated cavity, so the wall dries from behind. Left to silver or oiled, your call.</p></div>
+          <span class="acc__label">Cedar</span>
+        </article>
+        <article class="acc__panel" tabindex="0">
+          <img src="https://picsum.photos/id/143/900/1200" alt="Timber planks" loading="lazy" />
+          <div class="acc__text"><h3>Glulam structure</h3><p>Engineered timber beams sized in-house. Long spans, exposed where they can be seen.</p></div>
+          <span class="acc__label">Glulam</span>
+        </article>
+        <article class="acc__panel" tabindex="0">
+          <img src="https://picsum.photos/id/240/900/1200" alt="Concrete steps" loading="lazy" />
+          <div class="acc__text"><h3>Board-formed concrete</h3><p>Stem walls and hearths cast against rough sawn boards. Takes the weather and shows its grain.</p></div>
+          <span class="acc__label">Concrete</span>
+        </article>
+        <article class="acc__panel" tabindex="0">
+          <img src="https://picsum.photos/id/265/900/1200" alt="Floor-to-ceiling glazing at sunset" loading="lazy" />
+          <div class="acc__text"><h3>High-performance glazing</h3><p>Triple-glazed units in thermally broken frames. Big glass without the cold wall in January.</p></div>
+          <span class="acc__label">Glass</span>
+        </article>
+        <article class="acc__panel" tabindex="0">
+          <img src="https://picsum.photos/id/210/900/1200" alt="Brick wall" loading="lazy" />
+          <div class="acc__text"><h3>Masonry hearths</h3><p>Brick and stone where the fire is. Mass that holds the afternoon heat into the evening.</p></div>
+          <span class="acc__label">Masonry</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROCESS: horizontal timeline -->
+    <section class="process" id="process">
+      <div class="process__pin">
+        <div class="process__head">
+          <span class="eyebrow">How a project runs</span>
+          <h2 class="process__title" data-reveal-type="words-alt">Six steps from first walk to move-in</h2>
+        </div>
+        <div class="process__track" id="process-track">
+          <svg class="process__line" id="process-line" preserveAspectRatio="none" aria-hidden="true"><path id="process-path" d="" /></svg>
+          <ol class="process__steps" id="process-steps"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="faq__head">
+        <h2 class="faq__title" data-reveal-type="underline">Questions we hear on the first call</h2>
+      </div>
+      <div class="faq__list" id="faq-list">
+        <div class="qa is-open">
+          <button class="qa__q" type="button" aria-expanded="true">How long does a custom home take from first meeting to permit?<span class="qa__icon" aria-hidden="true"></span></button>
+          <div class="qa__a"><p>Most new homes run six to nine months from the site walk to a permit-ready set, depending on how quickly decisions land and on county review times. Small projects are usually faster.</p></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false">Do you only work in Jefferson County?<span class="qa__icon" aria-hidden="true"></span></button>
+          <div class="qa__a"><p>Port Townsend is home, and most work is on the Olympic Peninsula and around Bremerton. For the right project we travel further, so ask.</p></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false">Can you do just the structural engineering for my builder?<span class="qa__icon" aria-hidden="true"></span></button>
+          <div class="qa__a"><p>Yes. Structural design is offered on its own for homes, additions and outbuildings drawn by others. You get stamped calculations and framing plans a builder can work from.</p></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false">What does the first conversation cost?<span class="qa__icon" aria-hidden="true"></span></button>
+          <div class="qa__a"><p>Nothing. Bring the address or parcel number and whatever you have sketched. We talk through the site, the budget range and what a realistic timeline looks like.</p></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false">Will you help choose a builder?<span class="qa__icon" aria-hidden="true"></span></button>
+          <div class="qa__a"><p>We work with a handful of local builders and are happy to make introductions. Bids are compared against the same drawing set so the numbers mean the same thing.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDIO + SITE PLAN PARALLAX -->
+    <section class="studio" id="studio">
+      <div class="studio__layers" aria-hidden="true">
+        <svg class="studio__contours" id="studio-contours" preserveAspectRatio="xMidYMid slice"></svg>
+        <div class="studio__photo" data-depth="0.35"><img src="https://picsum.photos/id/10/1600/1000" alt="" loading="lazy" /></div>
+        <div class="studio__photo studio__photo--b" data-depth="0.6"><img src="https://picsum.photos/id/229/1000/1300" alt="" loading="lazy" /></div>
+      </div>
+      <div class="studio__copy">
+        <h2 class="studio__title" data-reveal-type="skew-lines">A studio on Mason Street, working across the Peninsula</h2>
+        <p class="studio__body">Kirk Boike Architects is a small practice in Port Townsend. Most of the work is new-build custom homes, with a steady run of additions, studios and outbuildings for people who already love where they live.</p>
+        <div class="studio__areas">
+          <h3>Service area</h3>
+          <ul>
+            <li>Port Townsend</li><li>Bremerton</li><li>Port Ludlow</li><li>Chimacum</li>
+            <li>Marrowstone Island</li><li>Sequim</li><li>Quilcene</li><li>Brinnon</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOICES -->
+    <section class="voices" id="voices">
+      <!-- sample testimonials, replace with client quotes -->
+      <figure class="quote quote--a" data-quote>
+        <blockquote>“Kirk walked the property twice before he drew anything. The house sits exactly where the morning light lands.”</blockquote>
+        <figcaption>Dana Whitlock, homeowner, Marrowstone Island</figcaption>
+      </figure>
+      <figure class="quote quote--b" data-quote>
+        <blockquote>“Having the engineering in the same office meant no waiting and no surprises at permit.”</blockquote>
+        <figcaption>Owen Marsh, general contractor, Chimacum</figcaption>
+      </figure>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="contact__copy">
+        <span class="eyebrow">Start here</span>
+        <h2 class="contact__title" data-reveal-type="blur">Tell us about the land.</h2>
+        <p class="contact__body">A first conversation is free. Bring a parcel number, a sketch on a napkin or just the address.</p>
+        <dl class="contact__details">
+          <div><dt>Phone</dt><dd><a href="tel:+13603856140">+1 360-385-6140</a></dd></div>
+          <div><dt>Studio</dt><dd><a href="https://maps.google.com/?q=4601+Mason+St,+Port+Townsend,+WA+98368" target="_blank" rel="noopener">4601 Mason St<br />Port Townsend, WA 98368</a></dd></div>
+          <div><dt>Hours</dt><dd>Monday to Friday<br />9:00 to 5:00</dd></div>
+        </dl>
+        <div class="contact__map">
+          <iframe title="Map to Kirk Boike Architects, 4601 Mason St, Port Townsend" src="https://www.google.com/maps?q=4601+Mason+St,+Port+Townsend,+WA+98368&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+      <form class="form" id="contact-form" novalidate>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required />
+            <span class="field__err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required />
+            <span class="field__err" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
+            <span class="field__hint">Optional</span>
+          </div>
+          <div class="field">
+            <label for="f-site">Property location</label>
+            <input id="f-site" name="site" type="text" placeholder="" />
+            <span class="field__hint">Town, road or parcel number</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-type">Project type</label>
+          <select id="f-type" name="type">
+            <option>New-build custom home</option>
+            <option>Addition or remodel</option>
+            <option>Studio, garage or outbuilding</option>
+            <option>Structural design only</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-msg">About the project</label>
+          <textarea id="f-msg" name="message" rows="5" required></textarea>
+          <span class="field__err" aria-live="polite"></span>
+        </div>
+        <button type="submit" class="btn btn--solid form__submit" data-magnetic><span class="btn__label">Book a consultation</span><span class="btn__busy" aria-hidden="true"></span></button>
+        <p class="form__status" id="form-status" role="status"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <a href="#hero" class="footer__brand">Kirk Boike Architects</a>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#studio">Studio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <address class="footer__addr">
+        <a href="tel:+13603856140">+1 360-385-6140</a>
+        <span>4601 Mason St, Port Townsend, WA 98368</span>
+      </address>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 Kirk Boike Architects. Residential architecture and structural design.</span>
+      <span>Olympic Peninsula, Washington</span>
+    </div>
+  </footer>
+
+  <!-- Project fullscreen view (card morphs into this) -->
+  <div class="pm" id="project-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+    <div class="pm__scrim" id="pm-scrim"></div>
+    <div class="pm__panel">
+      <button class="pm__close" id="pm-close" aria-label="Close project">Close</button>
+      <div class="pm__media" id="pm-media">
+        <img class="pm__img" id="pm-img" src="" alt="" crossorigin="anonymous" />
+        <div class="pm__drawing" id="pm-drawing"><canvas id="pm-lines"></canvas></div>
+        <button class="pm__handle" id="pm-handle" type="button" role="slider" aria-label="Compare the drawing with the finished photo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"><span></span></button>
+        <div class="pm__tags"><button type="button" data-compare="100">Drawing</button><button type="button" data-compare="0">Built</button></div>
+      </div>
+      <div class="pm__body">
+        <h3 class="pm__title" id="pm-title"></h3>
+        <dl class="pm__meta">
+          <div><dt>Location</dt><dd id="pm-loc"></dd></div>
+          <div><dt>Type</dt><dd id="pm-type"></dd></div>
+          <div><dt>Completed</dt><dd id="pm-year"></dd></div>
+        </dl>
+        <p class="pm__desc" id="pm-desc"></p>
+        <a href="#contact" class="btn btn--line pm__cta">Book a consultation</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
